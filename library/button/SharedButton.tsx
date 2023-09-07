@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import   { useContext } from "react";
 import { ThemeContext } from "../themeContext";
 
 interface Props {
@@ -7,19 +7,7 @@ interface Props {
   style?: any;
 }
 
-const defaultTheme = {
-  primary_color: "blue",
-  button: {
-    _light: {
-      background: "pink",
-      text: "black",
-    },
-    _dark: {
-      background: "black",
-      text: "pink",
-    },
-  },
-};
+ 
 
 function SharedButton({ label = "button", onClick, style }: Props) {
   const { currentTheme, currentMode } = useContext(ThemeContext);
