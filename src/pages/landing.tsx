@@ -1,23 +1,26 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import "../App.css";
-import { ThemeContext } from "../../library/themeContext";
+import useLibraryThemeHook from "../../library/hooks/useLibraryThemeHook";
 import SharedButton from "../../library/button/SharedButton";
+import appThemeHook, { AVAILABLE_CUSTOM_THEMES } from "../hooks/appTheme";
 
 function LandingPage() {
   const [count, setCount] = useState(0);
 
-  const { toggleThemeMode, currentTheme, currentMode } =
-    useContext(ThemeContext);
+  const { currentTheme } = useLibraryThemeHook();
+  const { ToggleCustomTheme, currentThemeModeName } = appThemeHook();
 
   return (
-    <div style={{ backgroundColor: currentTheme.page[currentMode].background }}>
+    <div style={{ backgroundColor: currentTheme.page.background }}>
       <SharedButton label="Test Button" />
 
       <SharedButton
         onClick={() => {
-          toggleThemeMode();
+          currentThemeModeName === AVAILABLE_CUSTOM_THEMES.customLightTheme
+            ? ToggleCustomTheme(AVAILABLE_CUSTOM_THEMES.customDarkTheme)
+            : ToggleCustomTheme(AVAILABLE_CUSTOM_THEMES.customLightTheme);
         }}
         label="Click to change theme"
       />
