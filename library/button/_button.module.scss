@@ -1,0 +1,16 @@
+.shared-button {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+
+  :hover {
+    all: unset;
+  }
+
+  .icon {
+    width: 1rem;
+    height: 1rem;
+  }
+}

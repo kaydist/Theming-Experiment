@@ -4,24 +4,18 @@ import viteLogo from "/vite.svg";
 import "../App.css";
 import useLibraryThemeHook from "../../library/hooks/useLibraryThemeHook";
 import SharedButton from "../../library/button/SharedButton";
-import appThemeHook, { AVAILABLE_CUSTOM_THEMES } from "../hooks/appTheme";
 
 function LandingPage() {
   const [count, setCount] = useState(0);
 
-  const { currentTheme } = useLibraryThemeHook();
-  const { ToggleCustomTheme, currentThemeModeName } = appThemeHook();
+  const { currentTheme, toggleThemeMode } = useLibraryThemeHook();
 
   return (
-    <div style={{ backgroundColor: currentTheme.page.background }}>
-      <SharedButton label="Test Button" />
+    <div>
+      <SharedButton label="Test Button" variant="outline" />
 
       <SharedButton
-        onClick={() => {
-          currentThemeModeName === AVAILABLE_CUSTOM_THEMES.customLightTheme
-            ? ToggleCustomTheme(AVAILABLE_CUSTOM_THEMES.customDarkTheme)
-            : ToggleCustomTheme(AVAILABLE_CUSTOM_THEMES.customLightTheme);
-        }}
+        onClick={() => toggleThemeMode()}
         label="Click to change theme"
       />
 

@@ -1,6 +1,5 @@
-import { ReactElement, useContext } from "react";
-import { ThemeContext } from "../themeContext";
-
+import { ReactElement, useState } from "react";
+import useLibraryThemeHook from "../hooks/useLibraryThemeHook";
 
 interface Props {
   label: string;
@@ -9,6 +8,8 @@ interface Props {
   style?: any;
   leftIcon?: ReactElement;
   rightIcon?: ReactElement;
+  iconClassName?: string;
+  disabled?: boolean;
 }
 
 function SharedButton({
@@ -17,19 +18,52 @@ function SharedButton({
   style,
   leftIcon,
   rightIcon,
-  variant = 'primary',
+  variant = "primary",
+  iconClassName = "",
+  disabled,
 }: Props) {
-  const { currentTheme } = useContext(ThemeContext);
-  const color = currentTheme.button;
+  const { currentTheme } = useLibraryThemeHook();
+  const buttonTheme = currentTheme.button;
+  let buttonStyle = {
+    backgroundColor: disabled
+      ? buttonTheme.disabled.background
+      : variant === "primary"
+      ? buttonTheme.background
+      : "transparent",
+    color: disabled
+      ? buttonTheme.disabled.text
+      : variant !== "primary"
+      ? buttonTheme.background
+      : buttonTheme.text,
+    border:
+      variant === "outline" && !disabled
+        ? `1px solid ${buttonTheme.background}`
+        : "transparent",
+    ...style,
+  };
+
+  let [over, setOver] = useState(false);
+
+  if (over && !disabled) {
+    buttonStyle.outline = `0.25rem solid ${currentTheme.colors.primary_color[100]}`;
+    buttonStyle.transition = "outline 0.1s ease-in-out";
+  } else {
+    buttonStyle.outline = "";
+  }
+
   return (
     <button
       onClick={onClick}
-      style={{ backgroundColor: color.background, color: color.text, ...style }}
-      className={`variant-${variant}`}
+      style={buttonStyle}
+      onMouseOver={() => setOver(true)}
+      onMouseOut={() => setOver(false)}
+      className={`shared-button variant-${variant}`}
     >
-      <div>{leftIcon}</div>
+      {leftIcon && <div className={`icon ${iconClassName}`}>{leftIcon}</div>}
+
       {label}
-      <div>{rightIcon}</div>
+
+      {rightIcon && <div className={`icon ${iconClassName}`}>{rightIcon}</div>}
     </button>
   );
 }

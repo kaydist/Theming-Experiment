@@ -1,9 +1,8 @@
 import { ThemeProvider } from "../library/themeContext";
-import appThemeHook from "./hooks/appTheme";
+import { customLightTheme } from "./assets/theme/customLightTheme";
 import LandingPage from "./pages/landing";
 
 function App() {
-
   return (
     <>
       <ThemeProvider>
