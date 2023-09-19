@@ -90,6 +90,14 @@ export const defaultTheme = (theme?: { [key: string]: any }) => {
         text: neutral_color[700],
       },
     },
+
+    tooltip: {
+      text: theme?.tooltip.text || primary_color[500],
+      content: {
+        background: theme?.tooltip.content?.background || secondary_color[500],
+        text: theme?.tooltip?.content?.text || white,
+      },
+    },
     ...theme?.extend,
   };
 };

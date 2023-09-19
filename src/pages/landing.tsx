@@ -4,6 +4,7 @@ import viteLogo from "/vite.svg";
 import "../App.css";
 import useLibraryThemeHook from "../../library/hooks/useLibraryThemeHook";
 import SharedButton from "../../library/button/SharedButton";
+import Tooltip from '../../library/tooltip/tooltip'
 
 function LandingPage() {
   const [count, setCount] = useState(0);
@@ -13,7 +14,7 @@ function LandingPage() {
   return (
     <div>
       <SharedButton label="Test Button" variant="outline" />
-
+<Tooltip content="This is the content" >This</Tooltip>
       <SharedButton
         onClick={() => toggleThemeMode()}
         label="Click to change theme"

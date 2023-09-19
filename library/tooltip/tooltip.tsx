@@ -1,5 +1,6 @@
 import React from "react";
-import "./_tooltip.scss";
+import Styles from "./_tooltip.module.scss";
+import useLibraryThemeHook from "../hooks/useLibraryThemeHook";
 
 export interface TooltipProps {
   content: string;
@@ -12,10 +13,24 @@ export default function Tooltip({
   children,
   content,
 }: TooltipProps) {
+  const { currentTheme } = useLibraryThemeHook();
+  const tooltipTheme = currentTheme.tooltip;
+
   return (
-    <div className={`tooltip ${className ? className : ""}`}>
+    <div
+      style={{ color: tooltipTheme.text }}
+      className={`${Styles.tooltip} ${className ? className : ""}`}
+    >
       <div>{children}</div>
-      <div className="tooltip-content">{content}</div>
+      <div
+        className={Styles.tooltip_content}
+        style={{
+          "--tooltip-bg_2d23": tooltipTheme.content.background, //Passes the variable to the stylesheet
+          color: tooltipTheme.content.text,
+        }}
+      >
+        {content}
+      </div>
     </div>
   );
 }

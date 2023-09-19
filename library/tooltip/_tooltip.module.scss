@@ -4,37 +4,39 @@
   position: relative;
   display: inline-block;
   cursor: pointer;
+}
 
-  .tooltip-content {
-    visibility: hidden;
-    opacity: 0;
-    padding: 0.55rem 0.89rem;
-    text-align: center;
-    min-width: fit-content;
-    width: max-content;
-    max-width: 320px;
-    font-weight: 400;
-    height: fit-content;
-    border-radius: 0.25rem;
-    position: absolute;
-    bottom: 0.75rem;
-    left: 50%;
-    transform: translate(-50%, -0.75rem);
-    transition: opacity 0.3s ease-in-out;
+.tooltip:hover .tooltip_content {
+  visibility: visible;
+  opacity: 1;
+}
 
-    &::after {
-      content: "";
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      margin-left: -5px;
-      border-width: 5px;
-      border-style: solid;
-    }
-  }
+.tooltip .tooltip_content {
+  visibility: hidden;
+  opacity: 0;
+  padding: 0.55rem 0.89rem;
+  text-align: center;
+  min-width: fit-content;
+  width: max-content;
+  max-width: 320px;
+  font-weight: 400;
+  height: fit-content;
+  border-radius: 0.25rem;
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translate(-50%, -0.75rem);
+  transition: opacity 0.3s ease-in-out;
+  background: var(--tooltip-bg_2d23);
+}
 
-  &:hover .tooltip-content {
-    visibility: visible;
-    opacity: 1;
-  }
+.tooltip .tooltip_content::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--tooltip-bg_2d23) transparent transparent transparent;
 }
